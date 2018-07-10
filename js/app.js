@@ -39,13 +39,13 @@ function shuffle(array) {
  */
 
 //VARIABLES
-let card = document.getElementsByClassName('card');
-let cards = [...cards];
+const card = document.getElementsByClassName('card');
+const cards = [...cards];
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", displayCard);
 };
 let moves = 0;
-let counter = document.querySelector(".moves");
+const counter = document.querySelector(".moves");
 
 const stars = document.querySelectorAll(".fa-star");
 
