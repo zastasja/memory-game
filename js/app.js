@@ -38,7 +38,7 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-
+//VARIABLES
 let card = document.getElementsByClassName('card');
 let cards = [...cards];
 for (let i = 0; i < cards.length; i++) {
@@ -51,8 +51,7 @@ const stars = document.querySelectorAll(".fa-star");
 
 const deck = document.getElementsByClassName(".deck");
 
-
-
+//FUNCTIONS
 
 let displayCard = function() {
     this.classList.toggle("open");
