@@ -39,8 +39,8 @@ function shuffle(array) {
  */
 
 //VARIABLES
-const card = document.getElementsByClassName('card');
-const cards = [...cards];
+const card = document.getElementsByClassName("card");
+const cards = [...card];
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener("click", displayCard);
 };
@@ -58,10 +58,13 @@ let displayCard = function() {
     this.classList.toggle("show");
     this.classList.toggle("match");
 }
-window.onload = startGame();
+
 const deck = document.querySelector(".deck");
 
+window.onload = startGame();
+
 function startGame() {
+    //shuffle
     let shuffledCards = shuffle(cards);
     for (let i = 0; i < shuffledCards.lengthl; i++) {
         deck.innerHTML = "";
@@ -71,6 +74,7 @@ function startGame() {
         cards[i].classList.remove("show", "open", "match");
     }
 
+    //moves restart
     moves = 0;
     counter.innerHTML = moves;
 
@@ -78,7 +82,7 @@ function startGame() {
         stars[i].style.color = "#FFD700";
         stars[i].style.visibility = "visible";
     }
-
+    //timer restart
     second = 0;
     minute = 0;
     hour = 0;
@@ -89,8 +93,8 @@ function startGame() {
 
 function cardOpen() {
     openedCards.push(this);
-    let length = openedCards.length;
-    if (length === 2) {
+    let cardLength = openedCards.length;
+    if (cardLength === 2) {
         moveCounter();
         if (openedCards[0].type === openedCards[1].type) {
             matched();
@@ -99,3 +103,38 @@ function cardOpen() {
         }
     }
 };
+
+function matched() {
+    openedCards[0].classList.add('match');
+    openedCards[1].classList.add('match');
+    openedCards[0].classList.remove('show', 'open');
+    openedCards[1].classList.remove('show', 'open');
+    openedCards = [];
+}
+
+function unmatched() {
+    openedCards[0].classList.add('unmatched');
+    openedCards[1].classList.add('unmatched');
+    disabled();
+    setTimeout(function() {
+        openedCards[0].classList.remove('show', 'open', 'unmathed');
+        openedCards[1].classList.remove('show', 'open', 'unmathed');
+        enable();
+        openedCards[];
+    }, 1500);
+}
+
+function disable() {
+    Array.prototype.filter.call(cards, function(card) {
+        card.classList.add('disabled');
+    });
+}
+
+function enable() {
+    Array.prototype.filter.call(cards, function(card) {
+        card.classList.remove('disabled');
+        for (var i = 0; i < matchedCard.length; i++) {
+            matchedCard[i].classList.add('disabled');
+        }
+    });
+}
