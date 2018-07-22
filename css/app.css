@@ -17,8 +17,9 @@ body {
 }
 
 body {
-    background: #ffffff url('../img/geometry2.png'); /* Background pattern from Subtle Patterns */
-    font-family: 'Coda', cursive;
+    background: #ffffff url('../img/geometry2.png');
+    font-family: 'Permanent Marker', cursive;
+    font-size: 16px;
 }
 
 .container {
@@ -29,35 +30,36 @@ body {
 }
 
 h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
+    font-family: 'Permanent Marker', cursive;
+    font-weight: 400;
+    color: #3d4140;
 }
 
-/*
- * Styles for the deck of cards
- */
+
+/* Styles for the deck */
 
 .deck {
-    width: 660px;
-    min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
-    padding: 32px;
-    border-radius: 10px;
-    box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
+    width: 85%;
+    background: #25f7af;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 8px 9px 26px 0 rgba(46, 61, 73, 0.5);
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 0 0 3em;
 }
 
 .deck .card {
-    height: 125px;
-    width: 125px;
-    background: #2e3d49;
+    height: 3.7rem;
+    width: 3.7rem;
+    margin: 0.2rem 0.2rem;
+    background: #44b990;
+    ;
     font-size: 0;
     color: #ffffff;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -66,9 +68,13 @@ h1 {
 }
 
 .deck .card.open {
-    transform: rotateY(0);
+    transform: rotateX(0);
     background: #02b3e4;
     cursor: default;
+    animation-name: flipInX;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+    animation-duration: .85s;
 }
 
 .deck .card.show {
@@ -77,18 +83,34 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #26f2f8;
     font-size: 33px;
+    animation-name: rubber;
+    -webkit-backface-visibility: visible;
+    backface-visibility: visible;
+    animation-duration: .85s;
 }
 
-/*
- * Styles for the Score Panel
- */
+.deck .card.unmatched {
+    animation-name: pulse;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    animation-duration: .85s;
+    background: #fc0d0d;
+}
+
+.deck .card.disabled {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+
+/* Styles for Score Panel */
 
 .score-panel {
     text-align: left;
-    width: 345px;
     margin-bottom: 10px;
+    color: #3d4140;
 }
 
 .score-panel .stars {
@@ -106,4 +128,192 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+
+.fa-star {
+    color: #FFD700;
+}
+
+.timer {
+    display: inline-block;
+    margin: 0 1rem;
+}
+
+
+/* Styles for modal */
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(166, 128, 232, 0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.overlay:target {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup {
+    margin: 70px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 5px;
+    width: 85%;
+    position: relative;
+    transition: all 2s ease-out;
+    font-family: 'Permanent Marker', cursive;
+}
+
+.popup h2 {
+    margin-top: 0;
+    color: #3d4140;
+    font-family: Tahoma, Arial, sans-serif;
+    text-align: center;
+}
+
+.popup .close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    transition: all 100ms;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #ccc;
+}
+
+.popup .close:hover {
+    color: #3d4140;
+}
+
+.popup .content-1,
+.content-2 {
+    max-height: 30%;
+    overflow: auto;
+    text-align: center;
+}
+
+.show {
+    visibility: visible;
+    opacity: 100;
+}
+
+#starRating li {
+    display: inline-block;
+}
+
+#play-again {
+    background-color: #02b3e4;
+    padding: 0.7rem 1rem;
+    font-size: 1.1rem;
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    font-family: 'Permanent Marker', cursive;
+    color: #ffffff;
+    border-radius: 5px;
+}
+
+
+/* animations */
+
+@keyframes flipInX {
+    0% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+        -webkit-transition-timing-function: ease-in;
+        transition-timing-function: ease-in;
+        opacity: 0;
+    }
+    40% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+        -webkit-transition-timing-function: ease-in;
+        transition-timing-function: ease-in;
+    }
+    60% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, 10deg);
+        opacity: 1;
+    }
+    80% {
+        -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+        transform: perspective(400px) rotate3d(1, 0, 0, -5deg);
+    }
+    100% {
+        -webkit-transform: perspective(400px);
+        transform: perspective(400px);
+    }
+}
+
+@keyframes rubber {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+    30% {
+        transform: scale3d(1.25, 0.75, 1);
+    }
+    40% {
+        transform: scale3d(0.75, 1.25, 1);
+    }
+    50% {
+        transform: scale3d(1.15, 0.85, 1);
+    }
+    65% {
+        transform: scale3d(.95, 1.05, 1);
+    }
+    75% {
+        transform: scale3d(1.05, .95, 1);
+    }
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale3d(1, 1, 1);
+    }
+    50% {
+        transform: scale3d(1.2, 1.2, 1.2);
+    }
+    100% {
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+
+/* Media queries */
+
+@media (max-width: 320px) {
+    .deck {
+        width: 85%;
+    }
+    .deck .card {
+        height: 4.7rem;
+        width: 4.7rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        font-size: 22px;
+    }
+    .deck {
+        width: 660px;
+        height: 680px;
+    }
+    .deck .card {
+        height: 125px;
+        width: 125px;
+    }
+    .popup {
+        width: 60%;
+    }
 }
