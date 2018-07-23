@@ -51,6 +51,8 @@ function startGame() {
         cards[i].classList.remove("show", "open", "match", "disabled");
     }
 
+    openedCards.length = 0;
+
     moves = 0;
     counter.innerHTML = moves;
 
@@ -199,7 +201,7 @@ function closeModal() {
     });
 }
 
-// play again trigger 
+// play again trigger
 function playAgain() {
     modal.classList.remove("show");
     startGame();
