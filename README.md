@@ -2,8 +2,12 @@
 
 This is matching game. Once it's opened two matched cards, it is possible to open others. In order to win you should open all the cards with less moves.
 
-### Author: Anastasia Zhukova
-### Repository link for downloading: https://github.com/zastasja/memory-game.git
+![screen](https://user-images.githubusercontent.com/33484571/43102061-c1e92eb2-8ed2-11e8-8602-193e5d1df8ba.jpg)
+
+### Author:
+Anastasia Zhukova
+### Repository link for downloading: 
+https://github.com/zastasja/memory-game.git
 
 ## Table of Contents
 
